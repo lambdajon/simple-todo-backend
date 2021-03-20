@@ -1,0 +1,123 @@
+/auth/login:
+  post:
+    tags:
+      - Auth
+    summary: Login
+    requestBody:
+      description: Login
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LoginModel'
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/apiResponse'
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - OK
+                data:
+                  type: object
+                  properties:
+                    user:
+                      $ref: '#/components/schemas/UserModel'
+                    tokens:
+                      $ref: '#/components/schemas/TokenModel'
+      400:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - INVALID_CREDENTIALS
+/auth/register:
+  post:
+    tags:
+      - Auth
+    summary: Register
+    requestBody:
+      description: Register
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RegisterModel'
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/apiResponse'
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - OK
+                data:
+                  type: object
+                  properties:
+                    user:
+                      $ref: '#/components/schemas/UserModel'
+      400:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - USER_EXIST
+/auth/verify:
+  get:
+    tags:
+      - Auth
+    summary: VerifyEmail
+    request:
+    parameters:
+      - in: query
+        name: code
+        required: true
+        type: string
+        description: verify code
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/apiResponse'
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - OK
+      404:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - USER_NOT_FOUND

@@ -1,0 +1,216 @@
+/todo-groups:
+  post:
+    security:
+      - Bearer: []
+    tags:
+      - Todo-Group
+    summary: Create
+    requestBody:
+      description: Create todo-group
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/NewTodoGroupModel"
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/apiResponse'
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - OK
+                data:
+                  type: object
+                  properties:
+                    todo:
+                      $ref: '#/components/schemas/TodoGroupModel'
+      500:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - SERVER_ERROR
+  get:
+    security:
+      - Bearer: []
+    tags:
+      - Todo-Group
+    summary: Get
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/apiResponse"
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - OK
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      todo:
+                        $ref: "#/components/schemas/TodoGroupModel"
+      500:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - SERVER_ERROR
+/todo-groups/{id}:
+  get:
+    security:
+      - Bearer: []
+    tags:
+      - Todo-Group
+    summary: GetOne
+    parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+        description: The todo ID
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/apiResponse"
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - OK
+                data:
+                  type: object
+                  properties:
+                    todo:
+                      $ref: "#/components/schemas/TodoGroupModel"
+      404:
+        description: Not found
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - TODO_NOT_FOUND
+  put:
+    security:
+      - Bearer: []
+    tags:
+      - Todo-Group
+    summary: Update
+    parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+        description: The todo ID
+    requestBody:
+      description: Update todo
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/NewTodoGroupModel"
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/apiResponse"
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - OK
+                data:
+                  type: object
+                  properties:
+                    todo:
+                      $ref: "#/components/schemas/TodoGroupModel"
+      500:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - SERVER_ERROR
+  delete:
+    security:
+      - Bearer: []
+    tags:
+      - Todo-Group
+    summary: Delete
+    parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+        description: The todo ID
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/apiResponse"
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - OK
+                data:
+                  type: object
+                  properties:
+                    todo:
+                      $ref: "#/components/schemas/TodoGroupModel"
+      404:
+        description: Not found
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - TODO_NOT_FOUND

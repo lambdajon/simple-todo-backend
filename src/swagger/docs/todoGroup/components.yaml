@@ -1,0 +1,26 @@
+components:
+  schemas:
+    TodoGroupModel:
+      type: 'object'
+      properties:
+        name:
+          type: 'string'
+          required: true
+        author:
+          type: 'string'
+        todos:
+          type: array
+          items:
+            $ref: '#/components/schemas/TodoModel'
+        createdAt:
+          type: string
+          format: date
+        updatedAt:
+          type: string
+          format: date
+    NewTodoGroupModel:
+      type: 'object'
+      properties:
+        name:
+          type: 'string'
+          required: true

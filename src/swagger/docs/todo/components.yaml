@@ -1,0 +1,37 @@
+components:
+  schemas:
+    TodoModel:
+      type: 'object'
+      properties:
+        _id:
+          type: string
+          format: uuid
+        name:
+          type: 'string'
+          required: true
+        description:
+          type: 'string'
+          required: true
+        author:
+          type: 'string'
+        group:
+          type: 'string'
+        createdAt:
+          type: string
+          format: date
+        updatedAt:
+          type: string
+          format: date
+    NewTodoModel:
+      type: 'object'
+      properties:
+        name:
+          type: 'string'
+          required: true
+        description:
+          type: 'string'
+          required: true
+        author:
+          type: 'string'
+        group:
+          type: 'string'

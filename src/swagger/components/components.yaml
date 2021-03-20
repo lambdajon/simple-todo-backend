@@ -1,0 +1,11 @@
+components:
+  schemas:
+    apiResponse:
+      type: object
+      properties:
+        message:
+          type: 'string'
+          description: Message Code of request. OK for success, others - for short error
+        data:
+          type: 'object'
+          description: Actual data of response
